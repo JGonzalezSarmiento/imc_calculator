@@ -12,7 +12,8 @@ class StyledContainer extends StatelessWidget {
     required this.child,
     this.padding = const EdgeInsets.all(12),
     this.margin = EdgeInsets.zero,
-    this.isSelected = false, // Valor por defecto
+    this.isSelected = false,
+    required double width, // Valor por defecto
   });
 
   @override

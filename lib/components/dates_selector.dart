@@ -22,99 +22,73 @@ class _DatesSelectorState extends State<DatesSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Escalas dinámicas
+    double titleFontSize = screenWidth * 0.04; // ~4% ancho
+    double valueFontSize = screenWidth * 0.07; // ~7% ancho
+    double spacing = screenWidth * 0.025;
+    double iconSpacing = screenWidth * 0.05;
+
+    Widget buildDataBox(
+      String title,
+      String value,
+      VoidCallback onDecrement,
+      VoidCallback onIncrement,
+    ) {
+      return Expanded(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: spacing / 2,
+            vertical: spacing,
+          ),
+          child: StyledContainer(
+            width: double.infinity,
+            child: Column(
+              children: [
+                Text(
+                  title.toUpperCase(),
+                  style: TextStyles.bodyTextBold.copyWith(
+                    fontSize: titleFontSize,
+                  ),
+                ),
+                SizedBox(height: spacing),
+                Text(
+                  value,
+                  style: TextStyles.bodyTextBold.copyWith(
+                    fontSize: valueFontSize,
+                  ),
+                ),
+                SizedBox(height: spacing),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleIconButton(
+                      onPressed: onDecrement,
+                      icon: Icons.remove,
+                      semanticLabel: 'Disminuir $title',
+                    ),
+                    SizedBox(width: iconSpacing),
+                    CircleIconButton(
+                      onPressed: onIncrement,
+                      icon: Icons.add,
+                      semanticLabel: 'Aumentar $title',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Row(
       children: [
-        // PESO
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              top: 16,
-              right: 4,
-              bottom: 8,
-            ),
-            child: StyledContainer(
-              child: Column(
-                children: [
-                  Text(
-                    'Peso'.toUpperCase(),
-                    style: TextStyles.bodyTextBold.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '$peso kg',
-                    style: TextStyles.bodyTextBold.copyWith(fontSize: 30),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleIconButton(
-                        onPressed: _decrementPeso,
-                        icon: Icons.remove,
-                        semanticLabel: 'Disminuir peso',
-                      ),
-                      const SizedBox(width: 20),
-                      CircleIconButton(
-                        onPressed: _incrementPeso,
-                        icon: Icons.add,
-                        semanticLabel: 'Aumentar peso',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-
-        const SizedBox(width: 5),
-
-        // EDAD
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 4,
-              top: 16,
-              bottom: 8,
-              right: 8,
-            ),
-            child: StyledContainer(
-              child: Column(
-                children: [
-                  Text(
-                    'Edad'.toUpperCase(),
-                    style: TextStyles.bodyTextBold.copyWith(fontSize: 16),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '$edad años',
-                    style: TextStyles.bodyTextBold.copyWith(fontSize: 30),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleIconButton(
-                        onPressed: _decrementEdad,
-                        icon: Icons.remove,
-                        semanticLabel: 'Disminuir edad',
-                      ),
-                      const SizedBox(width: 20),
-                      CircleIconButton(
-                        onPressed: _incrementEdad,
-                        icon: Icons.add,
-                        semanticLabel: 'Aumentar edad',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+        buildDataBox('Peso', '$peso kg', _decrementPeso, _incrementPeso),
+        SizedBox(width: spacing / 2),
+        buildDataBox('Edad', '$edad años', _decrementEdad, _incrementEdad),
       ],
     );
   }

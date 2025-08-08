@@ -12,10 +12,18 @@ class GenderSelector extends StatefulWidget {
 class _GenderSelectorState extends State<GenderSelector> {
   String? selectedGender;
 
-  Widget _buildGenderOption(String gender, String imageAsset) {
+  Widget _buildGenderOption(
+    String gender,
+    String imageAsset,
+    double iconSize,
+    double fontSize,
+  ) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        padding: EdgeInsets.symmetric(
+          horizontal: iconSize * 0.08, // padding proporcional
+          vertical: iconSize * 0.16,
+        ),
         child: GestureDetector(
           onTap: () {
             setState(() {
@@ -24,17 +32,22 @@ class _GenderSelectorState extends State<GenderSelector> {
           },
           child: StyledContainer(
             isSelected: selectedGender == gender,
+            width: double.infinity,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   imageAsset,
-                  height: 100,
+                  height: iconSize,
                   errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.error_outline, size: 100),
+                      Icon(Icons.error_outline, size: iconSize),
                 ),
-                const SizedBox(height: 8),
-                Text(gender.toUpperCase(), style: TextStyles.bodyTextBold),
+                SizedBox(height: iconSize * 0.08),
+                Text(
+                  gender.toUpperCase(),
+                  style: TextStyles.bodyTextBold.copyWith(fontSize: fontSize),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
@@ -45,10 +58,26 @@ class _GenderSelectorState extends State<GenderSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Tamaños adaptativos
+    double iconSize = screenWidth * 0.22; // imágenes ~22% del ancho de pantalla
+    double fontSize = screenWidth * 0.045; // texto ~4.5% del ancho
+
     return Row(
       children: [
-        _buildGenderOption('Hombre', 'assets/images/male.png'),
-        _buildGenderOption('Mujer', 'assets/images/female.png'),
+        _buildGenderOption(
+          'Hombre',
+          'assets/images/male.png',
+          iconSize,
+          fontSize,
+        ),
+        _buildGenderOption(
+          'Mujer',
+          'assets/images/female.png',
+          iconSize,
+          fontSize,
+        ),
       ],
     );
   }

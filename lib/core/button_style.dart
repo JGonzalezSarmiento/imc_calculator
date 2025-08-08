@@ -12,6 +12,7 @@ class ButtStyles extends StatelessWidget {
     required this.content,
     this.isSelected = false, // ✅ Solo una vez
     this.onTap,
+    required Text child,
   });
 
   @override
