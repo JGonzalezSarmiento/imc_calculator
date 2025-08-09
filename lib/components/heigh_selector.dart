@@ -33,7 +33,7 @@ class _HeighSelectorState extends State<HeighSelector> {
         decoration: BoxDecoration(
           color: AppColors.backgrounComponents,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFCAAFAF), width: 5),
+          border: Border.all(color: const Color(0xFFB40196), width: 3),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: verticalPadding),

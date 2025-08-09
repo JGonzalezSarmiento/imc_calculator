@@ -4,7 +4,14 @@ import 'package:imc_calculator/core/styled_container.dart';
 import 'package:imc_calculator/core/circle_icon_button.dart';
 
 class DatesSelector extends StatefulWidget {
-  const DatesSelector({super.key});
+  final ValueChanged<int> onWeightChange;
+  final ValueChanged<int> onAgeChange;
+
+  const DatesSelector({
+    super.key,
+    required this.onWeightChange,
+    required this.onAgeChange,
+  });
 
   @override
   State<DatesSelector> createState() => _DatesSelectorState();
@@ -14,11 +21,34 @@ class _DatesSelectorState extends State<DatesSelector> {
   int peso = 60;
   int edad = 25;
 
-  // Validación de valores con límites realistas
-  void _incrementPeso() => setState(() => peso = peso < 200 ? peso + 1 : peso);
-  void _decrementPeso() => setState(() => peso = peso > 30 ? peso - 1 : peso);
-  void _incrementEdad() => setState(() => edad = edad < 120 ? edad + 1 : edad);
-  void _decrementEdad() => setState(() => edad = edad > 1 ? edad - 1 : edad);
+  // Validación de valores con límites realistas y comunicación al padre
+  void _incrementPeso() {
+    setState(() {
+      if (peso < 200) peso++;
+      widget.onWeightChange(peso);
+    });
+  }
+
+  void _decrementPeso() {
+    setState(() {
+      if (peso > 30) peso--;
+      widget.onWeightChange(peso);
+    });
+  }
+
+  void _incrementEdad() {
+    setState(() {
+      if (edad < 120) edad++;
+      widget.onAgeChange(edad);
+    });
+  }
+
+  void _decrementEdad() {
+    setState(() {
+      if (edad > 1) edad--;
+      widget.onAgeChange(edad);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

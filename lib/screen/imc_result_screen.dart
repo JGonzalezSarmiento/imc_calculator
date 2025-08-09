@@ -15,7 +15,7 @@ class ImcResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgrounComponents,
+      backgroundColor: AppColors.backgroundApp,
       appBar: toolbarResult(),
       body: bodyResult(context),
     );
@@ -44,9 +44,9 @@ class ImcResultScreen extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
+                  color: const Color(0xFF91037B),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: const Color(0xFFCAAFAF), width: 5),
+                  border: Border.all(color: const Color(0xFFB40196), width: 3),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -95,14 +95,17 @@ class ImcResultScreen extends StatelessWidget {
                 shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: BorderSide(color: const Color(0xFFCAAFAF), width: 5),
+                    side: BorderSide(color: const Color(0xFFB40196), width: 3),
                   ),
                 ),
                 backgroundColor: WidgetStateProperty.all(
-                  AppColors.primaryColor,
+                  const Color(0xFF91037B),
                 ),
               ),
-              child: Text("Finalizar", style: TextStyles.bodyTextBold),
+              child: Text(
+                "Finalizar",
+                style: TextStyles.bodyTextBold.copyWith(fontSize: 25),
+              ),
             ),
           ),
         ],
@@ -113,7 +116,7 @@ class ImcResultScreen extends StatelessWidget {
   AppBar toolbarResult() {
     return AppBar(
       title: Text("Resultado"),
-      backgroundColor: AppColors.backgroundApp,
+      backgroundColor: AppColors.primaryColor,
       foregroundColor: Colors.white,
     );
   }
@@ -121,18 +124,18 @@ class ImcResultScreen extends StatelessWidget {
   Color getColorByImc(double imcResult) {
     return switch (imcResult) {
       < 18.5 => Colors.blue, //IMC Bajo
-      < 24.9 => Colors.green, //IMC normal
-      < 29.99 => Colors.orange, //Sobrepeso
-      _ => Colors.red, //Obesidad
+      < 24.9 => const Color(0xFF60FF65), //IMC normal
+      < 29.99 => const Color(0xFFF56302), //Sobrepeso
+      _ => const Color(0xFFD30202), //Obesidad
     };
   }
 
   String getTitleByImc(double imcResult) {
     return switch (imcResult) {
-      < 18.5 => "Imc Bajo",
-      < 24.9 => "Imc Normal",
-      < 29.99 => "Sobrepeso",
-      _ => "Obesidad",
+      < 18.5 => "IMC BAJO",
+      < 24.9 => "IMC NORMAL",
+      < 29.99 => "SOBREPESO",
+      _ => "OBESIDAD",
     };
   }
 

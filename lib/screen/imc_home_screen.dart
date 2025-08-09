@@ -15,7 +15,8 @@ class ImcHomeScreen extends StatefulWidget {
 
 class _ImcHomeScreenState extends State<ImcHomeScreen> {
   double selectedHeight = 160;
-  int selectedWeight = 25;
+  int selectedWeight = 60;
+  int selectedAge = 25;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,9 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
     final isSmallScreen = size.height < 600;
 
     return Scaffold(
-      backgroundColor: AppColors.backgroundApp,
+      backgroundColor: const Color(0xFF2B0124),
       body: SafeArea(
         child: SingleChildScrollView(
-          // Scroll para evitar overflow
           padding: EdgeInsets.symmetric(
             horizontal: size.width * 0.04,
             vertical: size.height * 0.02,
@@ -34,13 +34,8 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
           child: Column(
             children: [
               SizedBox(height: size.height * 0.02),
-
-              // Selector de género
               GenderSelector(),
-
               SizedBox(height: size.height * 0.03),
-
-              // Selector de altura
               HeighSelector(
                 selectedHeight: selectedHeight,
                 onHeightChange: (newHeight) {
@@ -49,26 +44,31 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                   });
                 },
               ),
-
               SizedBox(height: size.height * 0.03),
-
-              // Selector de edad/fechas
-              DatesSelector(),
-
+              DatesSelector(
+                onWeightChange: (newWeight) {
+                  setState(() {
+                    selectedWeight = newWeight;
+                  });
+                },
+                onAgeChange: (newAge) {
+                  setState(() {
+                    selectedAge = newAge;
+                  });
+                },
+              ),
               SizedBox(height: size.height * 0.05),
-
-              // Botón Calcular
               SizedBox(
                 height: isSmallScreen ? 60 : 80,
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.backgrounComponents,
+                    backgroundColor: const Color(0xFF91037B),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                       side: const BorderSide(
-                        color: Color(0xFFCAAFAF),
-                        width: 5,
+                        color: Color(0xFFB40196),
+                        width: 3,
                       ),
                     ),
                   ),

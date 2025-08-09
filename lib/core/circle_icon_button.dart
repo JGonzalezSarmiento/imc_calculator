@@ -13,7 +13,7 @@ class CircleIconButton extends StatelessWidget {
     required this.onPressed,
     required this.icon,
     this.size = 40,
-    this.backgroundColor = const Color(0xFF83016F),
+    this.backgroundColor = const Color(0xFF44023A),
     this.iconColor = Colors.white,
     this.semanticLabel, // Hacemos el parámetro opcional
   });

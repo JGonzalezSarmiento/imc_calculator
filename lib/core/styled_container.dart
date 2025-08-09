@@ -29,8 +29,8 @@ class StyledContainer extends StatelessWidget {
           color: isSelected
               ? Colors
                     .white // Borde más visible cuando está seleccionado
-              : const Color(0xFFCAAFAF),
-          width: 5,
+              : const Color(0xFFB40196),
+          width: 3,
         ),
       ),
       child: Padding(padding: padding, child: child),

@@ -7,7 +7,7 @@ class AppColors {
   static const primaryText = Color(0xFFFFFFFF);
 
   //Background
-  static const backgroundApp = Color(0xFF6C0B5C);
-  static const backgrounComponents = Color(0xFFF903D4);
+  static const backgroundApp = Color(0xFF2B0124);
+  static const backgrounComponents = Color(0xFF91037B);
   static const backgroundComponentsSelected = Color(0xFFFE5EE6);
 }
